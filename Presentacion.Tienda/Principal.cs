@@ -32,15 +32,15 @@ namespace Presentacion.Tienda
         }
         private void LlenarProductos(string valor)
         {
-            dtg_Tienda.DataSource = _productologica.ObtenerProductos(valor);
+            dtgTienda.DataSource = _productologica.ObtenerProductos(valor);
         }
         private void GuardarProductos()
         {
             Productos nuevoProducto = new Productos();
             nuevoProducto.IDProducto = 0;
-            nuevoProducto.Nombre = txt_nombre.Text;
-            nuevoProducto.Descripcion = txt_descripcion.Text;
-            nuevoProducto.Precio = decimal.Parse(txt_precio.Text);
+            nuevoProducto.Nombre = txtNombre.Text;
+            nuevoProducto.Descripcion = txtDescripcion.Text;
+            nuevoProducto.Precio = decimal.Parse(txtPrecio.Text);
 
             var validar = _productologica.ValidarProducto(nuevoProducto);
             if (validar.Item1)
@@ -66,25 +66,25 @@ namespace Presentacion.Tienda
         }
         private void ControlarCuadros(Boolean estado)
         {
-            txt_nombre.Enabled = estado;
-            txt_descripcion.Enabled = estado;
-            txt_precio.Enabled = estado;
-            txt_buscar.Enabled = estado;
+            txtNombre.Enabled = estado;
+            txtDescripcion.Enabled = estado;
+            txtPrecio.Enabled = estado;
+            txtBuscar.Enabled = estado;
         }
         private void LimpiarCuadros()
         {
-            txt_nombre.Text = "";
-            txt_descripcion.Text = "";
-            txt_precio.Text = "";
+            txtNombre.Text = "";
+            txtDescripcion.Text = "";
+            txtPrecio.Text = "";
         }
         private void ActualizarCategoria()
         {
 
             Productos nuevoProducto = new Productos();
             nuevoProducto.IDProducto= id;
-            nuevoProducto.Nombre = txt_nombre.Text;
-            nuevoProducto.Descripcion = txt_descripcion.Text;
-            nuevoProducto.Precio = decimal.Parse(txt_precio.Text);
+            nuevoProducto.Nombre = txtNombre.Text;
+            nuevoProducto.Descripcion = txtDescripcion.Text;
+            nuevoProducto.Precio = decimal.Parse(txtPrecio.Text);
 
             var validar = _productologica.ValidarProducto(nuevoProducto);
             if (validar.Item1)
@@ -102,29 +102,28 @@ namespace Presentacion.Tienda
         }
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            LlenarProductos(txt_buscar.Text);
+            LlenarProductos(txtBuscar.Text);
         }
         public void Eliminar()
         {
             if (MessageBox.Show("¿Desea eliminar la categoria seleccionada", "Eliminar categoria?",
                 MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                var id = dtg_Tienda.CurrentRow.Cells["id"].Value.ToString();
+                var id = dtgTienda.CurrentRow.Cells["id"].Value.ToString();
                 _productologica.EliminarProducto(int.Parse(id));
             }
         }
-
         private void dtgCategoria_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ControlarBotones(false, true, true, false, false);
             ControlarCuadros(true);
-            txt_nombre.Focus();
+            txtNombre.Focus();
 
-            txt_nombre.Text = dtg_Tienda.CurrentRow.Cells["nombre"].Value.ToString();
-            txt_descripcion.Text = dtg_Tienda.CurrentRow.Cells["descripcion"].Value.ToString();
-            txt_precio.Text = dtg_Tienda.CurrentRow.Cells["precio"].Value.ToString();
-            id = int.Parse(dtg_Tienda.CurrentRow.Cells["idproducto"].Value.ToString());
-            banderaGuardar = "actualizar";
+            txtNombre.Text = dtgTienda.CurrentRow.Cells["Nombre"].Value.ToString();
+            txtDescripcion.Text = dtgTienda.CurrentRow.Cells["Descripcion"].Value.ToString();
+            txtPrecio.Text = dtgTienda.CurrentRow.Cells["Precio"].Value.ToString();
+            id = int.Parse(dtgTienda.CurrentRow.Cells["IDProducto"].Value.ToString());
+            banderaGuardar = "Actualizar";
         }
         private void btnCerrar_Click(object sender, EventArgs e)
         {
@@ -134,44 +133,32 @@ namespace Presentacion.Tienda
         {
             ControlarBotones(false, true, true, false, false);
             ControlarCuadros(true);
-            txt_nombre.Focus();
-            banderaGuardar = "guardar";
+            txtNombre.Focus();
+            banderaGuardar = "Guardar";
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (banderaGuardar == "guardar")
+            if (banderaGuardar == "Guardar")
             {
                 GuardarProductos();
                 LlenarProductos("");
             }
-            else if (banderaGuardar == "actualizar")
+            else if (banderaGuardar == "Actualizar")
             {
                 ActualizarCategoria();
                 LlenarProductos("");
             }
         }
-
-        private void btnCancelar_Click_1(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             ControlarBotones(true, false, false, true, true);
             ControlarCuadros(false);
         }
-
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Eliminar();
             LlenarProductos("");
-        }
-
-        private void btnCerrar_Click_1(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void txt_buscar_TextChanged(object sender, EventArgs e)
-        {
-            LlenarProductos(txt_buscar.Text);
         }
     }
 }

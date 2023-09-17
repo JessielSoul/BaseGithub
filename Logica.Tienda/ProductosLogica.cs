@@ -10,28 +10,27 @@ namespace Logica.Tienda
 {
     public class ProductosLogica
     {
-        private ProductosAccesoDatos _productosAccesoDatos;
+        private ProductosAccesoDatos _productosAcceso;
 
         public ProductosLogica()
         {
-            _productosAccesoDatos = new ProductosAccesoDatos();
+            _productosAcceso = new ProductosAccesoDatos();
         }
-
         public List<Productos> ObtenerProductos(string valor)
         {
-            return _productosAccesoDatos.ObtenerProductos(valor);
+            return _productosAcceso.ObtenerProductos(valor);
         }
         public void GuardarProducto(Productos nuevoProducto)
         {
-            _productosAccesoDatos.GuardarProducto(nuevoProducto);
+            _productosAcceso.GuardarProducto(nuevoProducto);
         }
         public void EliminarProducto(int id)
         {
-            _productosAccesoDatos.EliminarProducto(id);
+            _productosAcceso.EliminarProducto(id);
         }
         public void ActualizarProducto(Productos nuevoProducto)
         {
-            _productosAccesoDatos.ActualizarProducto(nuevoProducto);
+            _productosAcceso.ActualizarProducto(nuevoProducto);
         }
         public Tuple<bool, string> ValidarProducto(Productos nuevoProducto)
         {

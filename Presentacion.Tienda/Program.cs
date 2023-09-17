@@ -12,9 +12,9 @@ namespace Presentacion.Tienda
         [STAThread]
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Tienda());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Frm_Tienda());
         }
     }
 }

@@ -21,7 +21,6 @@ namespace AccesoDatos.Tienda
             cadenaConexion.Password = password;
             cadenaConexion.Database = database;
             cadenaConexion.Port = puerto;
-
             _conn = new MySqlConnection(cadenaConexion.ToString());
         }
         public void EjecutarConsulta(string consulta)

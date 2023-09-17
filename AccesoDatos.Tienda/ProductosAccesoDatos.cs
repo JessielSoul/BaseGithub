@@ -27,10 +27,10 @@ namespace AccesoDatos.Tienda
             {
                 var product = new Productos
                 {
-                    IDProducto = Convert.ToInt32(renglon["idproducto"]),
-                    Nombre = renglon["nombre"].ToString(),
-                    Descripcion = renglon["descripcion"].ToString(),
-                    Precio = Convert.ToDecimal(renglon["precio"]),
+                    IDProducto = Convert.ToInt32(renglon["IDProducto"]),
+                    Nombre = renglon["Nombre"].ToString(),
+                    Descripcion = renglon["Descripcion"].ToString(),
+                    Precio = Convert.ToDecimal(renglon["Precio"]),
                 };
                 listaProductos.Add(product);
             }
@@ -38,22 +38,21 @@ namespace AccesoDatos.Tienda
         }
         public void GuardarProducto(Productos nuevoProducto)
         {
-            string consulta = string.Format("Insert into productos values(null, '{0}', '{1}', '{2}')",
+            string consulta = string.Format("Insert into Productos values(null, '{0}', '{1}', '{2}')",
                 nuevoProducto.Nombre, nuevoProducto.Descripcion, nuevoProducto.Precio);
             conexion.EjecutarConsulta(consulta);
         }
         public void ActualizarProducto(Productos nuevoProducto)
         {
-            string consulta = string.Format("update productos set nombre = '{0}', descripcion = '{1}', " +
-                "precio = '{2}' where idproducto = {3}",
+            string consulta = string.Format("Update Productos set Nombre = '{0}', Descripcion = '{1}', " +
+                "Precio = '{2}' where IDProducto = {3}",
                 nuevoProducto.Nombre, nuevoProducto.Descripcion, nuevoProducto.Precio, nuevoProducto.IDProducto);
             conexion.EjecutarConsulta(consulta);
         }
         public void EliminarProducto(int id)
         {
-            string consulta = string.Format("delete from productos where idproducto = {0}", id);
+            string consulta = string.Format("Delete from Productos where IDProducto = {0}", id);
             conexion.EjecutarConsulta(consulta);
         }
-
     }
 }
